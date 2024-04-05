@@ -6,7 +6,7 @@ import flow from './flows';
 import { provider } from './provider';
 
 const PORT = process.env.PORT ?? 3001
-const ai = new AIClass(process.env.OPEN_API_KEY, 'gpt-3.5-turbo')
+const ai = new AIClass(process.env.OPEN_API_KEY, 'gpt-3.5-turbo-0125')
 
 const main = async () => {
 

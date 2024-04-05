@@ -1,4 +1,4 @@
-export const MAKE_ADD_TO_CALENDAR = process.env.MAKE_ADD_TO_CALENDAR ?? ''
+export const MAKE_ADD_TO_CALENDAR = process.env.MAKE_ADD_TO_CALENDAR ?? '' 
 export const MAKE_GET_FROM_CALENDAR = process.env.MAKE_GET_FROM_CALENDAR ?? ''
 
 export const CHATPDF_API = process.env.CHATPDF_API ?? ''

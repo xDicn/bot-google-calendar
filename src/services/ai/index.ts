@@ -126,6 +126,56 @@ class AIClass {
             }
         }
     };
+    determineConfirmFn = async (
+        messages: ChatCompletionMessageParam[],
+        model?: string,
+        temperature = 0
+    ): Promise<{ prediction: string }> => {
+        try {
+            const completion = await this.openai.chat.completions.create({
+                model,
+                temperature: temperature,
+                messages,
+                functions: [
+                    {
+                        name: "fn_get_confirmation_intent",
+                        description: "Predict the user intention for a given conversation",
+                        parameters: {
+                            type: "object",
+                            properties: {
+                                prediction: {
+                                    type: "string",
+                                    description: "The predicted user intention.",
+                                    items: {
+                                        type: "string",
+                                        enum: [
+                                            "CONFIRMAR",
+                                            "CANCELAR",
+                                            "INVALIDO"
+                                        ]
+                                    },
+                                },
+
+                            },
+                            required: ["prediction"]
+                        }
+                    }
+                ],
+                function_call: {
+                    name: "fn_get_confirmation_intent",
+                }
+            });
+            // Convert json to object
+            const response = JSON.parse(completion.choices[0].message.function_call.arguments);
+
+            return response;
+        } catch (err) {
+            console.error(err);
+            return {
+                prediction: '',
+            }
+        }
+    };
 
     /**
      * experimental 🟠

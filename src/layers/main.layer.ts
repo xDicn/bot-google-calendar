@@ -9,12 +9,14 @@ const PROMPT_DISCRIMINATOR = `### Historial de Conversación (Vendedor/Cliente) 
 
 ### Intenciones del Usuario ###
 
-**HABLAR**: Selecciona esta acción si el cliente parece querer hacer una pregunta o necesita más información.
-**PROGRAMAR**: Selecciona esta acción si el cliente muestra intención de programar una cita.
+**HABLAR**: Selecciona esta acción si el cliente parece querer hacer una pregunta o necesita más información que NO tenga que ver con una cita.
+**PROGRAMAR**: Selecciona esta acción si el cliente muestra intención de programar una cita. Ejemplo:"cual es la fecha mas cercana en la que tienen disponibilidad?"
 
 ### Instrucciones ###
 
-Por favor, clasifica la siguiente conversación según la intención del usuario.`
+Por favor, clasifica la siguiente conversación según la intención del usuario.
+La prioridad es la siguiente: Hablar>Programar
+`
 
 export default async (_: BotContext, { state, gotoFlow, extensions }: BotMethods) => {
     const ai = extensions.ai as AIClass

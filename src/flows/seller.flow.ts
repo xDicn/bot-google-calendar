@@ -4,6 +4,8 @@ import { getHistoryParse, handleHistory } from "../utils/handleHistory";
 import AIClass from "../services/ai";
 import { getFullCurrentDate } from "src/utils/currentDate";
 import { pdfQuery } from "src/services/pdf";
+//import { ModuloAsesorIA } from "src/services/pdf/AsesorIA.js";
+//const AsesorIA = new ModuloAsesorIA();
 
 const PROMPT_SELLER = `Como experto en ventas con aproximadamente 15 años de experiencia en embudos de ventas y generación de leads, tu tarea es mantener una conversación agradable, responder a las preguntas del cliente sobre nuestros productos y, finalmente, guiarlos para reservar una cita. Tus respuestas deben basarse únicamente en el contexto proporcionado:
 
@@ -27,6 +29,10 @@ Para proporcionar respuestas más útiles, puedes utilizar la información propo
 ### INTRUCCIONES
 - Mantén un tono profesional y siempre responde en primera persona.
 - NO ofrescas promociones que no existe en la BASE DE DATOS
+- Presenta los servicios y precios solicitados en un listado
+- No menciones el nombre de la empresa en cada oración.
+- No incites a agendar una cita.
+- Si te preguntan por un servicio, ofrece unicamente los datos de ese servicio; a menos que haya una oferta que se relacione.
 
 Respuesta útil adecuadas para enviar por WhatsApp (en español):`
 
@@ -40,7 +46,6 @@ export const generatePromptSeller = (history: string, database:string) => {
 };
 
 const flowSeller = addKeyword(EVENTS.ACTION)
-    .addAnswer(`⏱️`)
     .addAction(async (ctx, { state, flowDynamic, extensions }) => {
         try {
 
@@ -48,7 +53,7 @@ const flowSeller = addKeyword(EVENTS.ACTION)
             const history = getHistoryParse(state)
 
             const dataBase = await pdfQuery(ctx.body)
-            console.log({dataBase})
+                        console.log({dataBase})
             const promptInfo = generatePromptSeller(history, dataBase)
 
             const response = await ai.createChat([
