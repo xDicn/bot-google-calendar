@@ -1,0 +1,32 @@
+{
+    "Información de la empresa": {
+      "nombre_empresa": "Salón 'El Diego'",
+      "slogan": "¡Quieres consentirte y lucir como una reina? Pues no busques más!",
+      "ubicacion": "Nos encontramos en el City Mall de Tegucigalpa en el 5to piso.",
+      "horarios": "Estamos disponibles de lunes a domingo de 8 am a 5 pm. Whatsapp está disponible 24/7.",
+      "redes_sociales": "https://www.facebook.com/digitalboosthn"
+    },
+    "Información de servicios": {
+      "precios_normales": {
+        "1": {"servicio": "Laminado de cejas", "precio": 600.00},
+        "2": {"servicio": "Laminado de pestañas", "precio": 800.00},
+        "3": {"servicio": "Pintado de uñas", "precio": 250.00},
+        "4": {"servicio": "Maquillaje profesional", "precio": 250.00},
+        "5": {"servicio": "Maquillaje de día", "precio": 550.00},
+        "6": {"servicio": "Maquillaje de noche", "precio": 700.00},
+        "7": {"servicio": "Encrespado de pestañas", "precio": 550.00},
+        "8": {"servicio": "Pintado de cejas", "precio": 350.00},
+        "9": {"servicio": "Planchado de cejas", "precio": 400.00},
+        "10": {"servicio": "Extensiones de pestañas clásicas", "precio": 1200.00},
+        "11": {"servicio": "Extensiones de pestañas híbridas", "precio": 1800.00},
+        "12": {"servicio": "Extensiones de pestañas volumen", "precio": 2200.00},
+        "13": {"servicio": "Manicure", "precio": 350.00},
+        "14": {"servicio": "Pedicure", "precio": 350.00},
+        "15": {"servicio": "Depilación de cejas", "precio": 500.00}
+      },
+      "ofertas_especiales": {
+        "1": {"descripcion": "Laminado de cejas y pintado de uñas", "precio": 750.00},
+        "2": {"descripcion": "Manicure y pedicure", "precio": 650.00}
+      }
+    }
+  }

@@ -126,6 +126,8 @@ class AIClass {
             }
         }
     };
+
+    
     determineConfirmFn = async (
         messages: ChatCompletionMessageParam[],
         model?: string,
