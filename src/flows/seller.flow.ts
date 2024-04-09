@@ -5,6 +5,8 @@ import AIClass from "../services/ai";
 import { getFullCurrentDate } from "src/utils/currentDate";
 import { pdfQuery } from "src/services/pdf";
 //import { JsonFileDB as Database } from '@builderbot/database-json'
+import fs from 'fs';
+import path from 'path';
 
 const PROMPT_SELLER = `Como experto en ventas con aproximadamente 15 años de experiencia en embudos de ventas y generación de leads, tu tarea es mantener una conversación agradable, responder a las preguntas del cliente sobre nuestros productos y, finalmente, guiarlos para reservar una cita. Tus respuestas deben basarse únicamente en el contexto proporcionado:
 
@@ -48,11 +50,17 @@ const flowSeller = addKeyword(EVENTS.ACTION)
     .addAction(async (ctx, { state, flowDynamic, extensions }) => {
         try {
 
+            const filePath = path.resolve('./src/database/db.json');
+
+            const dataBase = fs.readFileSync(filePath, 'utf8');
+
             const ai = extensions.ai as AIClass
             const history = getHistoryParse(state)
 
-            const dataBase = await pdfQuery(ctx.body)
-                        console.log({dataBase})
+            //const dataBase = await pdfQuery(ctx.body)
+                        //console.log({dataBase})
+
+                      
             const promptInfo = generatePromptSeller(history, dataBase)
 
             const response = await ai.createChat([
@@ -63,9 +71,10 @@ const flowSeller = addKeyword(EVENTS.ACTION)
             ])
 
             await handleHistory({ content: response, role: 'assistant' }, state)
-            const chunks = response.split(/(?<!\d)\.\s+/g);
+            
+            const chunks = [response.trim()];
             for (const chunk of chunks) {
-                await flowDynamic([{ body: chunk.trim(), delay: generateTimer(150, 250) }]);
+                await flowDynamic([{ body: chunk, delay: generateTimer(150, 250) }]);
             }
         } catch (err) {
             console.log(`[ERROR]:`, err)
